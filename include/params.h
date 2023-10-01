@@ -2,9 +2,12 @@
 
 typedef struct Param {
 	int state;
-	char *flag;
+	char* flag;
 } param;
 
 typedef struct Params {
-	param addProps;
+	char *path, *ext;
+	param add_props, js, ts;
 } params;
+
+void params_init(params* params);

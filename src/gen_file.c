@@ -24,3 +24,8 @@ int file_exists (const char *filename) {
 
     return is_exist;
 }
+
+char * gen_file_name (char output[100], char * path, char * name, char * ext) {
+	sprintf(output, "%s/%s%s", path, name, ext);
+	return output;
+}

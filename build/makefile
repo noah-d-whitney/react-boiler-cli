@@ -7,7 +7,7 @@ BUILDDIR=build
 _DEPS = params.h gen_file.h gen_md.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.c gen_file.c gen_md.c
+_OBJ = main.c gen_file.c gen_md.c params.c
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.c $(DEPS)

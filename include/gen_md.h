@@ -12,5 +12,4 @@ typedef struct Snippets {
 	snippet props;
 } snippets;
 
-char* gen_md 		(char output[256], params *processParams, char *filename);
-char* gen_file_name	(char output[100], char * path, char * name, char * ext);
+char* gen_md (char output[256], params *processParams, char *filename);

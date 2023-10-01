@@ -73,8 +73,3 @@ int find_ins_index(char* string, char* target, int ins_pos) {
 
 	return ins_index;
 }
-
-char * gen_file_name (char output[100], char * path, char * name, char * ext) {
-	sprintf(output, "%s/%s%s", path, name, ext);
-	return output;
-}
