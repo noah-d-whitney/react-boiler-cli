@@ -15,7 +15,8 @@ char* gen_md (char output[256], params *processParams, char *filename) {
 	sprintf(md_snips.base.md, "const %s = () => {\n\treturn <></>;\n}\n\nexport default %s;", filename, filename);
 	md_snips.base.ins_pos = 0;
 
-	sprintf(md_snips.interface.md, "interface %sProps {\n\n}", filename);
+	sprintf(md_snips.interface.md, "interface %sProps {\n\n}\n\n", filename);
+	strcpy(md_snips.interface.target, "const ");
 	md_snips.interface.ins_pos = 0;// CHANGE
 
 	sprintf(md_snips.props.md, "props: %sProps", filename);
@@ -29,8 +30,13 @@ char* gen_md (char output[256], params *processParams, char *filename) {
 	strcpy(mdbuf, md_snips.base.md);
 	// Print MDBUF
 
-	int i = find_ins_index(mdbuf, md_snips.props.target, md_snips.props.ins_pos);
-	inj_snip(mdbuf, i, md_snips.props.md);
+	if (processParams->add_props.state == 1) {
+		int i;
+		i = find_ins_index(mdbuf, md_snips.props.target, md_snips.props.ins_pos);
+		inj_snip(mdbuf, i, md_snips.props.md);
+		i = find_ins_index(mdbuf, md_snips.interface.target, md_snips.interface.ins_pos);
+		inj_snip(mdbuf, i, md_snips.interface.md);
+	}
 
 	strcpy(output, mdbuf);
 

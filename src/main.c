@@ -10,10 +10,10 @@ int main ( int argc, char *argv[] ) {
 	params process_params;
 	params_init(&process_params);
 
-	char file_args[argc][20];
+	char** file_args;
 	int file_args_i = 0;
+	file_args = malloc(argc * sizeof(char*));
 
-	int i;
 	for (int i = 1; i < argc; i++) {
 		char* arg = argv[i];
 		if ( strcmp(arg, process_params.add_props.flag) == 0 ) { 
@@ -28,14 +28,15 @@ int main ( int argc, char *argv[] ) {
 			process_params.ts.state = 0;
 		}
 		else {
-			sprintf(&file_args[file_args_i][0], "%s", argv[i]);
+			file_args[file_args_i] = malloc(strlen(arg) * sizeof(char));
+			strcpy(file_args[file_args_i], arg);
 			file_args_i++;
+			printf("%i\n", file_args_i);
 		}
 	}
 
-	for (int i = 0; i < argc; i++) {
+	for (int i = 0; i < file_args_i; i++) {
 		char name[100];
-
 		gen_md(markdown, &process_params, file_args[i]);
 		gen_file_name(name, process_params.path, file_args[i], process_params.ext);
 		gen_file(name, file_args[i], markdown);
